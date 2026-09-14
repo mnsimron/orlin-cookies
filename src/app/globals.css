@@ -1,26 +1,82 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #3E2723;
+  --color-secondary: #D87D4A;
+  --color-tertiary: #F4EFEA;
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-lato);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: var(--color-tertiary);
+  --foreground: var(--color-primary);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes orlin-breathe {
+  0%,
+  100% {
+    transform: scale(0.96);
+    opacity: 0.78;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes orlin-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orlin-dot {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  40% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.orlin-loading-icon {
+  animation: orlin-breathe 2.4s ease-in-out infinite;
+}
+
+.orlin-loading-ring-orbit {
+  border: 2px solid rgb(216 125 74 / 0.16);
+  border-top-color: #D87D4A;
+  border-right-color: rgb(216 125 74 / 0.72);
+  animation: orlin-orbit 1.15s linear infinite;
+  will-change: transform;
+}
+
+.orlin-loading-dot {
+  animation: orlin-dot 1.4s ease-in-out infinite;
+}
+
+.orlin-loading-dot:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.orlin-loading-dot:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orlin-loading-icon,
+  .orlin-loading-ring-orbit,
+  .orlin-loading-dot {
+    animation: none;
+  }
 }
